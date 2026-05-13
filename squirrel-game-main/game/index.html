@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Squirrel Jump - Белка прыгунья</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        body {
+            background: linear-gradient(180deg, #87CEEB 0%, #98D8E8 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+            touch-action: manipulation;
+            padding: 10px;
+        }
+        .game-container {
+            background: #4a2f1d;
+            border-radius: 30px;
+            padding: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        canvas {
+            display: block;
+            margin: 0 auto;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            cursor: pointer;
+            touch-action: none;
+        }
+        .score-panel {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 15px;
+            background: #2d1a0e;
+            border-radius: 20px;
+            margin-top: 15px;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .score-box {
+            background: #ffd966;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 20px;
+            color: #5a3a1a;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .best-box {
+            background: #ffaa33;
+            padding: 8px 15px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 16px;
+            color: #5a3a1a;
+        }
+        .nut-balance {
+            background: #8B5A2B;
+            padding: 8px 15px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 18px;
+            color: #ffd966;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .shop-btn {
+            background: #4CAF50;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .shop-btn:hover {
+            transform: scale(1.05);
+        }
+        .shop-panel {
+            margin-top: 15px;
+            background: #2d1a0e;
+            border-radius: 20px;
+            padding: 10px;
+            display: none;
+        }
+        .shop-panel.show {
+            display: block;
+        }
+        .skins-list {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .skin-item {
+            background: #5a3a1a;
+            border-radius: 15px;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            width: 80px;
+        }
+        .skin-item.selected {
+            background: #4CAF50;
+            transform: scale(1.05);
+        }
+        .skin-item.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .skin-emoji {
+            font-size: 40px;
+        }
+        .skin-price {
+            font-size: 12px;
+            color: #ffd966;
+            margin-top: 5px;
+        }
+        .skin-name {
+            font-size: 12px;
+            color: white;
+        }
+        .controls {
+            text-align: center;
+            margin-top: 10px;
+            color: white;
+            font-size: 12px;
+        }
+        @media (max-width: 500px) {
+            .score-box { font-size: 16px; padding: 5px 12px; }
+            .skin-item { width: 65px; }
+            .skin-emoji { font-size: 30px; }
+        }
+    </style>
+</head>
+<body>
+<div>
+    <div class="game-container">
+        <canvas id="gameCanvas" width="350" height="500"></canvas>
+        <div class="score-panel">
+            <div class="score-box">🏆 <span id="score">0</span></div>
+            <div class="nut-balance">🌰 <span id="nutBalance">0</span></div>
+            <div class="best-box">🏅 <span id="bestScore">0</span></div>
+            <button class="shop-btn" id="shopBtn">🛒 Магазин</button>
+        </div>
+        <div class="shop-panel" id="shopPanel">
+            <div class="skins-list" id="skinsList"></div>
+        </div>
+        <div class="controls">
+            🖱️ Мышь/Палец → движение влево/вправо
+        </div>
+    </div>
+</div>
+<script src="game.js"></script>
+</body>
+</html>
